@@ -1,4 +1,4 @@
-let gameBoard = (() => {
+const gameBoard = (() => {
     let board = ["", "", "", "", "", "", "", "", ""];
 
     const updateBoard = (position, player) => {
@@ -22,4 +22,4 @@ const Player = (name, mark) => {
     }
 
     return {getName, getMark};
-}
+} 
