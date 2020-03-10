@@ -3,7 +3,7 @@ let gameBoard = (() => {
 
     const updateBoard = (position, player) => {
         if(board[position] === ""){
-            board[position] = player.mark;
+            board[position] = player.getMark;
         } else {
             alert('Please pick a new spot.');
         }
@@ -11,3 +11,15 @@ let gameBoard = (() => {
 
     return {updateBoard};
 })();
+
+const Player = (name, mark) => {
+    const getName = () => {
+        return name;
+    }
+
+    const getMark = () => {
+        return mark;
+    }
+
+    return {getName, getMark};
+}
