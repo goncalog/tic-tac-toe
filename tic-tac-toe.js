@@ -48,5 +48,14 @@ const displayController = (() => {
         // get display and change innerHtml according to mark
     }
 
-    return {getLastPlayer, getNextPlayer, setLastPlayer, setNextPlayer, updateDisplay}
+    const clean = () => {
+        let gridItems = document.getElementsByClassName("grid-item");
+        for(let key in Object.keys(gridItems)) {
+            gridItems[key].innerHTML = "";
+        }
+    }
+
+    return {getLastPlayer, getNextPlayer, setLastPlayer, setNextPlayer, updateDisplay, clean};
 })();
+
+displayController.clean();
