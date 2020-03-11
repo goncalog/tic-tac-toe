@@ -15,7 +15,15 @@ const gameBoard = (() => {
         }
     }
 
-    return {updateBoard};
+    const restart = () => {
+        board = ["", "", "", "", "", "", "", "", ""];
+    }
+
+    const get = () => {
+        return board;
+    }
+
+    return {updateBoard, restart, get};
 })();
 
 const Player = (name, mark) => {
@@ -110,6 +118,7 @@ const game = (() => {
         displayController.setNextPlayer(playerO);
         
         displayController.restart();
+        gameBoard.restart();
     }
 
     const checkWinner = (board, mark) => {
@@ -162,6 +171,12 @@ const game = (() => {
     }
 
     return {start, checkWinner, getIsOver}
+})();
+
+const newGameButton = (() => {
+    document.getElementById("new-game").addEventListener("click", function() {
+        game.start();
+    });
 })();
 
 game.start();

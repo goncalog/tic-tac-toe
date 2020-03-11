@@ -1,15 +1,32 @@
 body {
     text-align: center;
     color: darkblue;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 h1 {
     font-weight: bold;
-    margin: 75px 0;
+    margin: 50px 0;
 }
 
 h2 {
     margin: 50px 0;
+}
+
+button {
+    cursor: pointer;
+    border-color: darkblue;
+    border-radius: 3px;
+    width: 150px;
+    height: 50px;
+    color: darkblue;
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+button:hover {
+    background-color: lightblue;
+    font-weight: bold;
 }
 
 .grid-container {
