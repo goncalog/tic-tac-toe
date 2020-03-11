@@ -60,3 +60,5 @@ const displayController = (() => {
 })();
 
 displayController.clean();
+const playerX = Player("playerX", "X");
+const playerO = Player("playerO", "O");
