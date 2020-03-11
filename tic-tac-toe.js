@@ -56,7 +56,7 @@ const displayController = (() => {
     }
 
     const setCurrentPlayerDisplay = () => {
-        document.getElementById("message").innerHTML = `Current player: ${currentPlayer.getMark()}`;
+        document.getElementById("message").innerHTML = `Current player: ${currentPlayer.getName()}`;
     }
     
     const setNextPlayer = (player) => {
