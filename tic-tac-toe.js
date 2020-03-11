@@ -5,6 +5,7 @@ const gameBoard = (() => {
         if(board[pos] === ""){
             board[pos] = mark;
             displayController.update(pos, mark);
+            displayController.changePlayers();
         } else {
             alert('Please pick a new spot.');
         }
@@ -67,7 +68,13 @@ const displayController = (() => {
         }
     }
 
-    return {getCurrentPlayer, getNextPlayer, setCurrentPlayer, setNextPlayer, update, restart};
+    const changePlayers = () => {
+        let nextPlayer = displayController.getCurrentPlayer();
+        displayController.setCurrentPlayer(displayController.getNextPlayer());
+        displayController.setNextPlayer(nextPlayer);
+    }
+
+    return {getCurrentPlayer, getNextPlayer, setCurrentPlayer, setNextPlayer, update, restart, changePlayers};
 })();
 
 const playerX = Player("playerX", "X");
