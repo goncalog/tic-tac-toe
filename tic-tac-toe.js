@@ -40,6 +40,11 @@ const displayController = (() => {
 
     const setCurrentPlayer = (player) => {
         currentPlayer = player;
+        setCurrentPlayerDisplay();
+    }
+
+    const setCurrentPlayerDisplay = () => {
+        document.getElementById("message").innerHTML = `Current player: ${currentPlayer.getMark()}`;
     }
     
     const setNextPlayer = (player) => {
@@ -81,7 +86,7 @@ const game = (() => {
     const start = () => {
         const playerX = Player("playerX", "X");
         displayController.setCurrentPlayer(playerX);
-        
+
         const playerO = Player("playerO", "O");
         displayController.setNextPlayer(playerO);
         
