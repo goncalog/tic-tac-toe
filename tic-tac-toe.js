@@ -1,9 +1,10 @@
 const gameBoard = (() => {
     let board = ["", "", "", "", "", "", "", "", ""];
 
-    const updateBoard = (position, player) => {
-        if(board[position] === ""){
-            board[position] = player.getMark;
+    const updateBoard = (pos, mark) => {
+        if(board[pos] === ""){
+            board[pos] = mark;
+            displayController.update(pos, mark);
         } else {
             alert('Please pick a new spot.');
         }
@@ -25,19 +26,19 @@ const Player = (name, mark) => {
 }
 
 const displayController = (() => {
-    let lastPlayer;
+    let currentPlayer;
     let nextPlayer;
 
-    const getLastPlayer = () => {
-        return lastPlayer;
+    const getCurrentPlayer = () => {
+        return currentPlayer;
     }
     
     const getNextPlayer = () => {
         return nextPlayer;
     }
 
-    const setLastPlayer = (player) => {
-        lastPlayer = player;
+    const setCurrentPlayer = (player) => {
+        currentPlayer = player;
     }
     
     const setNextPlayer = (player) => {
@@ -61,16 +62,17 @@ const displayController = (() => {
         let gridItems = document.getElementsByClassName("grid-item");
         for(let key in Object.keys(gridItems)) {
             gridItems[key].addEventListener("click", function() {
-                // update to use current player
-                this.innerHTML = playerX.getMark();
-                gameBoard.updateBoard(this.id, playerX);
+                gameBoard.updateBoard(this.id, displayController.getCurrentPlayer().getMark());
             });
         }
     }
 
-    return {getLastPlayer, getNextPlayer, setLastPlayer, setNextPlayer, update, restart};
+    return {getCurrentPlayer, getNextPlayer, setCurrentPlayer, setNextPlayer, update, restart};
 })();
 
-displayController.restart();
 const playerX = Player("playerX", "X");
+displayController.setCurrentPlayer(playerX);
 const playerO = Player("playerO", "O");
+displayController.setNextPlayer(playerO);
+
+displayController.restart();
