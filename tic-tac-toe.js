@@ -2,12 +2,16 @@ const gameBoard = (() => {
     let board = ["", "", "", "", "", "", "", "", ""];
 
     const updateBoard = (pos, mark) => {
-        if(board[pos] === ""){
-            board[pos] = mark;
-            displayController.update(pos, mark);
-            displayController.changePlayers();
+        if(game.getIsOver()){
+            alert('Please start a new game.');
         } else {
-            alert('Please pick a new spot.');
+            if(board[pos] === ""){
+                board[pos] = mark;
+                displayController.update(pos, mark);
+                game.checkWinner(board, mark);
+            } else {
+                alert('Please pick a new spot.');
+            }
         }
     }
 
@@ -79,11 +83,26 @@ const displayController = (() => {
         displayController.setNextPlayer(nextPlayer);
     }
 
-    return {getCurrentPlayer, getNextPlayer, setCurrentPlayer, setNextPlayer, update, restart, changePlayers};
+    const setWinnerDisplay = () => {
+        document.getElementById("message").innerHTML 
+                = `Congrats, ${currentPlayer.getName()} won!`;
+    }
+
+    const setDrawDisplay = () => {
+        document.getElementById("message").innerHTML 
+                = `It's a draw!`;
+    }
+
+    return {getCurrentPlayer, getNextPlayer, setCurrentPlayer, setNextPlayer, 
+                update, restart, changePlayers, setWinnerDisplay, setDrawDisplay};
 })();
 
 const game = (() => {
+    let isOver = false;
+
     const start = () => {
+        isOver = false;
+        
         const playerX = Player("playerX", "X");
         displayController.setCurrentPlayer(playerX);
 
@@ -93,7 +112,56 @@ const game = (() => {
         displayController.restart();
     }
 
-    return {start}
+    const checkWinner = (board, mark) => {
+        let isWinner = false;
+        if(board[0] === board[1] && board[0] === board[2] && board[0] === mark){
+            isWinner = true;
+        } else if(board[3] === board[4] && board[3] === board[5] && board[3] === mark){
+            isWinner = true;
+        } else if(board[6] === board[7] && board[6] === board[8] && board[6] === mark){
+            isWinner = true;
+        } else if(board[0] === board[3] && board[0] === board[6] && board[0] === mark){
+            isWinner = true;
+        } else if(board[1] === board[4] && board[1] === board[7] && board[1] === mark){
+            isWinner = true;
+        } else if(board[2] === board[5] && board[2] === board[8] && board[2] === mark){
+            isWinner = true;
+        } else if(board[0] === board[4] && board[0] === board[8] && board[0] === mark){
+            isWinner = true;
+        } else if(board[2] === board[4] && board[2] === board[6] && board[2] === mark){
+            isWinner = true;
+        }
+
+        if(isWinner){
+            displayController.setWinnerDisplay();
+            isOver = true;
+        } else {
+            checkDraw(board);
+        }
+    }
+
+    const checkDraw = (board) => {
+        let isDraw = true;
+
+        board.forEach(e => {
+            if(e === ""){
+                isDraw = false;
+            }
+        });
+
+        if(isDraw){
+            displayController.setDrawDisplay();
+            isOver = true;
+        } else {
+            displayController.changePlayers();
+        }
+    }
+
+    const getIsOver = () => {
+        return isOver;
+    }
+
+    return {start, checkWinner, getIsOver}
 })();
 
 game.start();
