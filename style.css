@@ -1,3 +1,31 @@
+body {
+    text-align: center;
+    color: darkblue;
+}
+
 h1 {
     font-weight: bold;
+    margin: 75px 0;
+}
+
+h2 {
+    margin: 50px 0;
+}
+
+.grid-container {
+    display: grid;
+    margin: 50px 33%;
+    height: 300px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.grid-item {
+    background-color: lightblue;
+    font-weight: bold;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
