@@ -73,16 +73,6 @@ const displayController = (() => {
         for(let key in Object.keys(gridItems)) {
             gridItems[key].innerHTML = "";
         }
-        clickEvent();
-    }
-
-    const clickEvent = () => {
-        let gridItems = document.getElementsByClassName("grid-item");
-        for(let key in Object.keys(gridItems)) {
-            gridItems[key].addEventListener("click", function() {
-                gameBoard.updateBoard(this.id, displayController.getCurrentPlayer().getMark());
-            });
-        }
     }
 
     const changePlayers = () => {
@@ -177,6 +167,15 @@ const newGameButton = (() => {
     document.getElementById("new-game").addEventListener("click", function() {
         game.start();
     });
+})();
+
+const clickEvents = (() => {
+    let gridItems = document.getElementsByClassName("grid-item");
+    for(let key in Object.keys(gridItems)) {
+        gridItems[key].addEventListener("click", function() {
+            gameBoard.updateBoard(this.id, displayController.getCurrentPlayer().getMark());
+        });
+    }
 })();
 
 game.start();
