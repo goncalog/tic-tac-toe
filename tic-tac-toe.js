@@ -56,6 +56,17 @@ const displayController = (() => {
         }
     }
 
+    const clickEvent = () => {
+        let gridItems = document.getElementsByClassName("grid-item");
+        for(let key in Object.keys(gridItems)) {
+            gridItems[key].addEventListener("click", function() {
+                // update to use current player
+                this.innerHTML = playerX.getMark();
+                gameBoard.updateBoard(this.id, playerX);
+            });
+        }
+    }
+
     return {getLastPlayer, getNextPlayer, setLastPlayer, setNextPlayer, update, clean};
 })();
 
