@@ -77,9 +77,18 @@ const displayController = (() => {
     return {getCurrentPlayer, getNextPlayer, setCurrentPlayer, setNextPlayer, update, restart, changePlayers};
 })();
 
-const playerX = Player("playerX", "X");
-displayController.setCurrentPlayer(playerX);
-const playerO = Player("playerO", "O");
-displayController.setNextPlayer(playerO);
+const game = (() => {
+    const start = () => {
+        const playerX = Player("playerX", "X");
+        displayController.setCurrentPlayer(playerX);
+        
+        const playerO = Player("playerO", "O");
+        displayController.setNextPlayer(playerO);
+        
+        displayController.restart();
+    }
 
-displayController.restart();
+    return {start}
+})();
+
+game.start();
