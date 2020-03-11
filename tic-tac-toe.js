@@ -1,7 +1,7 @@
 const gameBoard = (() => {
     let board = ["", "", "", "", "", "", "", "", ""];
 
-    const updateBoard = (pos, mark) => {
+    const update = (pos, mark) => {
         if(game.getIsOver()){
             alert('Please start a new game.');
         } else {
@@ -23,7 +23,7 @@ const gameBoard = (() => {
         return board;
     }
 
-    return {updateBoard, restart, get};
+    return {update, restart, get};
 })();
 
 const Player = (name, mark) => {
@@ -185,7 +185,7 @@ const clickEvents = (() => {
     let gridItems = document.getElementsByClassName("grid-item");
     for(let key in Object.keys(gridItems)) {
         gridItems[key].addEventListener("click", function() {
-            gameBoard.updateBoard(this.id, displayController.getCurrentPlayer().getMark());
+            gameBoard.update(this.id, displayController.getCurrentPlayer().getMark());
         });
     }
 })();
