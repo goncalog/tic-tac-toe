@@ -49,11 +49,12 @@ const displayController = (() => {
         gridItems[pos].innerHTML = mark;
     }
 
-    const clean = () => {
+    const restart = () => {
         let gridItems = document.getElementsByClassName("grid-item");
         for(let key in Object.keys(gridItems)) {
             gridItems[key].innerHTML = "";
         }
+        clickEvent();
     }
 
     const clickEvent = () => {
@@ -67,9 +68,9 @@ const displayController = (() => {
         }
     }
 
-    return {getLastPlayer, getNextPlayer, setLastPlayer, setNextPlayer, update, clean};
+    return {getLastPlayer, getNextPlayer, setLastPlayer, setNextPlayer, update, restart};
 })();
 
-displayController.clean();
+displayController.restart();
 const playerX = Player("playerX", "X");
 const playerO = Player("playerO", "O");
