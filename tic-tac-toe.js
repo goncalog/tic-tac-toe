@@ -98,13 +98,13 @@ const displayController = (() => {
 const game = (() => {
     let isOver = false;
 
-    const start = () => {
+    const start = (player1, player2) => {
         isOver = false;
         
-        const playerX = Player("playerX", "X");
+        const playerX = Player(player1, "X");
         displayController.setCurrentPlayer(playerX);
 
-        const playerO = Player("playerO", "O");
+        const playerO = Player(player2, "O");
         displayController.setNextPlayer(playerO);
         
         displayController.restart();
@@ -165,7 +165,19 @@ const game = (() => {
 
 const newGameButton = (() => {
     document.getElementById("new-game").addEventListener("click", function() {
-        game.start();
+        document.getElementById("players").style.visibility = "visible";
+        document.getElementById("new-game").style.visibility = "hidden";
+        document.getElementById("message").innerHTML = "";
+    });
+})();
+
+const submitForm = (() => {
+    document.getElementById("submit-form").addEventListener("click", function() {
+        event.preventDefault();
+        let form = document.getElementById("players");
+        form.style.visibility = "hidden";
+        document.getElementById("new-game").style.visibility = "visible";
+        game.start(form.player1.value, form.player2.value);
     });
 })();
 
@@ -177,5 +189,3 @@ const clickEvents = (() => {
         });
     }
 })();
-
-game.start();
