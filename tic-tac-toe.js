@@ -44,8 +44,9 @@ const displayController = (() => {
         nextPlayer = player;
     }
 
-    const updateDisplay = (pos, mark) => {
-        // get display and change innerHtml according to mark
+    const update = (pos, mark) => {
+        let gridItems = document.getElementsByClassName("grid-item");
+        gridItems[pos].innerHTML = mark;
     }
 
     const clean = () => {
@@ -55,7 +56,7 @@ const displayController = (() => {
         }
     }
 
-    return {getLastPlayer, getNextPlayer, setLastPlayer, setNextPlayer, updateDisplay, clean};
+    return {getLastPlayer, getNextPlayer, setLastPlayer, setNextPlayer, update, clean};
 })();
 
 displayController.clean();
